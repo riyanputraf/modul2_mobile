@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:modul1_old/NavBar.dart';
 import 'package:modul1_old/details.dart';
+import 'package:modul1_old/homeLogin.dart';
 import 'package:modul1_old/listwidget.dart';
+import 'package:modul1_old/login.dart';
 import 'package:modul1_old/shared/listitem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
+import 'package:shared_preferences/shared_preferences.dart';
 
 // @dart=2.9
 void main() {
@@ -41,6 +45,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   double ratingC = 0;
+
   List<ListItem> listTiles = [
     ListItem(
         "https://www.tagar.id/Asset/uploads2019/1607941807684-cover-novel-padang-bulan.jpg",
@@ -155,10 +160,25 @@ class _HomePageState extends State<HomePage>
   ];
 
   late TabController _tabcontroller;
+  late bool menu;
+
+  void checkLogin() async{
+    SharedPreferences loginData = await SharedPreferences.getInstance();
+    menu = (loginData.getBool('checkLogin') ?? true);
+    var name = loginData.getString('nameUser');
+    var nim = loginData.getString('nim');
+
+    print(menu);
+
+    if(menu == false){
+      Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomeLogin(name: name, nim: nim)));
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    // checkLogin();
     _tabcontroller = TabController(vsync: this, length: _tablist.length);
   }
 
@@ -170,17 +190,19 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      drawer: NavBar(),
       appBar: AppBar(
         toolbarHeight: 110.0,
-        leading: IconButton(
+        /*leading: IconButton(
           onPressed: () {},
           icon: Icon(
             Icons.menu,
             color: Colors.white,
             size: 35.0,
           ),
-        ),
+        ),*/
         backgroundColor: Color(0xFFE040FB),
         centerTitle: true,
         title: Text(
