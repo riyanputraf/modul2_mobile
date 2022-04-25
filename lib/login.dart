@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modul1_old/dummy_data.dart';
 import 'package:modul1_old/homeLogin.dart';
-import 'package:modul1_old/shared/listitem.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +14,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _userName = new TextEditingController();
   final _password = new TextEditingController();
-  late final DummyData dummyData;
   bool checkLogin = false;
 
   /*saveData() async {
@@ -123,13 +121,12 @@ class _LoginState extends State<Login> {
                                     nim: nim,
                                   )));
                       break;
-                    }else if(15 == data['id']) {
+                    } else if (15 == data['id']) {
                       print("failed");
                       loginFailed(context);
                       break;
                     }
                   }
-
                 },
                 child: Text("Login"),
               ),
@@ -156,10 +153,5 @@ class _LoginState extends State<Login> {
         )
       ],
     ).show();
-
-
-
-
-
   }
 }
