@@ -24,7 +24,7 @@ class _HomeLoginState extends State<HomeLogin> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("nama : ${widget.name}"),
+              Text("Nama : ${widget.name}"),
               Text("NIM : ${widget.nim}"),
               TextButton.icon(
                   onPressed: () {

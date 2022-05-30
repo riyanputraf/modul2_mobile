@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:modul1_old/homeLogin.dart';
 import 'package:modul1_old/login.dart';
+import 'package:modul1_old/main.dart';
 import 'package:modul1_old/shared/listitem.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -104,7 +106,7 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.logout),
             title: Text("Logout"),
             onTap: () async {
-              logOut();
+              // logOut(context);
               SharedPreferences loginData = await SharedPreferences.getInstance();
               loginData.remove('checkLogin');
               loginData.remove('nim');
@@ -116,8 +118,10 @@ class _NavBarState extends State<NavBar> {
                 finalNim = "User NIM Aplication";
 
               });
-
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp()));
+// Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => Login()));
               print('press');
+
             },
           ),
         ],
@@ -125,7 +129,7 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
-  void logOut() {
+  void logOut(BuildContext context)  {
     Alert(
       context: context,
       type: AlertType.info,
@@ -134,10 +138,24 @@ class _NavBarState extends State<NavBar> {
       buttons: [
         DialogButton(
           child: Text(
-            "Kembali",
+            "Login",
             style: TextStyle(color: Colors.white, fontSize: 14),
           ),
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+          onPressed: () async {
+            // Navigator.of(context, rootNavigator: true).pop(),
+            final result = await Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => Login()));
+
+            if(result == null || result != null){
+              setState(() {
+                Navigator.of(context, rootNavigator: true).pop();
+              });
+            }else{
+              Navigator.of(context, rootNavigator: true).pop();
+            }
+
+          }
+
         )
       ],
     ).show();
@@ -150,7 +168,7 @@ class _NavBarState extends State<NavBar> {
     if(check == false){
       Alert(
         context: context,
-        type: AlertType.info,
+        type: AlertType.success,
         title: "Berhasil terbuka",
         desc: "Fitur terbatas bagi user login",
         buttons: [

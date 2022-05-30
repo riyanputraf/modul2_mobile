@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                   final localStorage = await SharedPreferences.getInstance();
                   for (var data in DummyData.data) {
                     print("test");
-                    if (_userName.text == data['username']) {
+                    if (_userName.text == data['username'] && _password.text == data['password']) {
                       print("berhasil");
                       await localStorage.setString('nim', data['Nim']);
                       await localStorage.setString(

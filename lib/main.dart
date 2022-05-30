@@ -170,15 +170,15 @@ class _HomePageState extends State<HomePage>
 
     print(menu);
 
-    if(menu == false){
-      Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomeLogin(name: name, nim: nim)));
+    if(menu == true){
+      Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => Login()));
     }
   }
 
   @override
   void initState() {
     super.initState();
-    // checkLogin();
+    checkLogin();
     _tabcontroller = TabController(vsync: this, length: _tablist.length);
   }
 
