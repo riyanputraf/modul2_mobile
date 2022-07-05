@@ -1,15 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:modul1_old/NavBar.dart';
+import 'package:modul1_old/auth.dart';
 import 'package:modul1_old/details.dart';
 import 'package:modul1_old/homeLogin.dart';
 import 'package:modul1_old/listwidget.dart';
 import 'package:modul1_old/login.dart';
 import 'package:modul1_old/shared/listitem.dart';
 import 'package:lipsum/lipsum.dart' as lipsum;
+import 'package:modul1_old/todo_list_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // @dart=2.9
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -18,8 +25,15 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) => MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => TodoListProvider(),
+        )
+
+
+      ],
+      child: MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       theme: ThemeData(
@@ -31,8 +45,9 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
+  )
     );
-  }
+
 }
 
 class HomePage extends StatefulWidget {
@@ -170,9 +185,9 @@ class _HomePageState extends State<HomePage>
 
     print(menu);
 
-    if(menu == true){
+    /*if(menu == true){
       Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => Login()));
-    }
+    }*/
   }
 
   @override

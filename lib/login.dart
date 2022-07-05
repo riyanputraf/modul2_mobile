@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modul1_old/auth.dart';
+import 'package:modul1_old/auth2.dart';
 import 'package:modul1_old/dummy_data.dart';
+import 'package:modul1_old/hasil.dart';
 import 'package:modul1_old/homeLogin.dart';
+import 'package:modul1_old/main.dart';
+import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,28 +21,6 @@ class _LoginState extends State<Login> {
   final _userName = new TextEditingController();
   final _password = new TextEditingController();
   bool checkLogin = false;
-
-  /*saveData() async {
-    final localStorage = await SharedPreferences.getInstance();
-    localStorage.setString('userName', _userName.text.toString());
-    localStorage.setString('password', _password.text.toString());
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomeLogin(
-                  name: "halo",
-                  nim: "test",
-                )));
-    for (var data in DummyData.data) {
-      if (_userName == data['username']) {
-        print("berhasil");
-        await localStorage.setString('nim', data['Nim']);
-        String? name = localStorage.getString('userName');
-        String? nim = localStorage.getString('nim');
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeLogin(name: "halo", nim: "test",)));
-      }
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +75,25 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 20,
               ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(
+                  "Belum Punya Akun ? ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 17),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                        decoration: TextDecoration.underline, fontSize: 17),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ]),
+              SizedBox(
+                height: 5,
+              ),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
@@ -103,7 +106,8 @@ class _LoginState extends State<Login> {
                   final localStorage = await SharedPreferences.getInstance();
                   for (var data in DummyData.data) {
                     print("test");
-                    if (_userName.text == data['username'] && _password.text == data['password']) {
+                    if (_userName.text == data['username'] &&
+                        _password.text == data['password']) {
                       print("berhasil");
                       await localStorage.setString('nim', data['Nim']);
                       await localStorage.setString(
@@ -130,6 +134,27 @@ class _LoginState extends State<Login> {
                 },
                 child: Text("Login"),
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Atau',
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    final provider = Provider.of<GoogleSignInProvider>(context,
+                        listen: false);
+                    provider.googleLogin();
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Hasil() ));
+                  },
+                  child: Text(
+                    'Login Google',
+                    style: TextStyle(fontSize: 20),
+                  )),
             ],
           ),
         ),

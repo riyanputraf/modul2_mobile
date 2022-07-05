@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:modul1_old/auth.dart';
+import 'package:modul1_old/example.dart';
 import 'package:modul1_old/homeLogin.dart';
+import 'package:modul1_old/home_screen.dart';
 import 'package:modul1_old/login.dart';
 import 'package:modul1_old/main.dart';
 import 'package:modul1_old/shared/listitem.dart';
+import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -92,6 +96,7 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.settings),
             title: Text("Settings"),
             onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Example()));
               print('press');
             },
           ),
@@ -99,6 +104,7 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.list),
             title: Text("Read List"),
             onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
               print('press');
             },
           ),
@@ -107,6 +113,9 @@ class _NavBarState extends State<NavBar> {
             title: Text("Logout"),
             onTap: () async {
               // logOut(context);
+              final provider = Provider.of<GoogleSignInProvider>(context,
+                  listen: false);
+              provider.logout();
               SharedPreferences loginData = await SharedPreferences.getInstance();
               loginData.remove('checkLogin');
               loginData.remove('nim');
@@ -118,8 +127,8 @@ class _NavBarState extends State<NavBar> {
                 finalNim = "User NIM Aplication";
 
               });
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp()));
-// Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => Login()));
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp()));
+//Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => Login()));
               print('press');
 
             },
@@ -137,9 +146,9 @@ class _NavBarState extends State<NavBar> {
       desc: "Username atau Password Salah",
       buttons: [
         DialogButton(
-          child: Text(
+          child: const Text(
             "Login",
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            style:  TextStyle(color: Colors.white, fontSize: 14),
           ),
           onPressed: () async {
             // Navigator.of(context, rootNavigator: true).pop(),

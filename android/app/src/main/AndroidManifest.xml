@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.modul1_old">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="modul1_old"
         android:name="${applicationName}"

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274087954548",
+    "project_id": "reaboks-bbc0c",
+    "storage_bucket": "reaboks-bbc0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274087954548:android:86aec73aa4bae3e3cca921",
+        "android_client_info": {
+          "package_name": "com.example.modul1_old"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274087954548-ccgm9k4red41rll9ljr3krfd03auk7rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHW555NbnaX0C1ZqKlpYBBj9SUd6Ca9F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274087954548-ccgm9k4red41rll9ljr3krfd03auk7rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
